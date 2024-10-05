@@ -1,7 +1,231 @@
-import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 export default function App() {
+  // 1. Print numbers from 1 to 10
+  function printNumbers() {
+    return Array.from({ length: 10 }, (_, i) => i + 1).join(", ");
+  }
+
+  // 2. Print the odd numbers less than 100
+  function printOddNumbers() {
+    let oddNumbers = [];
+    for (let i = 1; i < 100; i += 2) {
+      oddNumbers.push(i);
+    }
+    return oddNumbers.join(", ");
+  }
+
+  // 3. Print the multiplication table with 7
+  function multiplicationTable7() {
+    let rows = [];
+    for (let i = 1; i <= 10; i++) {
+      rows.push(
+        <tr key={i}>
+          <td>7</td>
+          <td>x</td>
+          <td>{i}</td>
+          <td>=</td>
+          <td>{7 * i}</td>
+        </tr>
+      );
+    }
+    return (
+      <table>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  }
+
+  // 4. Print all the multiplication tables with numbers from 1 to 10
+  function multiplicationTables() {
+    let tables = [];
+    for (let i = 1; i <= 10; i++) {
+      let rows = [];
+      for (let j = 1; j <= 10; j++) {
+        rows.push(
+          <tr key={`${i}-${j}`}>
+            <td>{i}</td>
+            <td>x</td>
+            <td>{j}</td>
+            <td>=</td>
+            <td>{i * j}</td>
+          </tr>
+        );
+      }
+      tables.push(
+        <div key={i}>
+          <h3>Multiplication Table of {i}</h3>
+          <table>
+            <tbody>{rows}</tbody>
+          </table>
+        </div>
+      );
+    }
+    return tables;
+  }
+
+  // 5. Calculate the sum of numbers from 1 to 10
+  function sumNumbers() {
+    const numbers = Array.from({ length: 10 }, (_, i) => i + 1);
+    const sum = numbers.reduce((a, b) => a + b, 0);
+    const calculation = numbers.join(" + ") + " = " + sum;
+    return calculation;
+  }
+  // 6. Calculate 10!
+  function factorial10() {
+    let factorial = 1;
+    let calculation = "";
+    for (let i = 1; i <= 10; i++) {
+      factorial *= i;
+      calculation += i === 1 ? `${i}` : ` x ${i}`;
+    }
+    calculation += ` = ${factorial}`;
+    return calculation;
+  }
+
+  // 7. Calculate the sum of even numbers greater than 10 and less than 30
+  function sumEvenNumbers() {
+    let sum = 0;
+    let calculation = "";
+    for (let i = 12; i < 30; i += 2) {
+      sum += i;
+      calculation += i === 12 ? `${i}` : ` + ${i}`;
+    }
+    calculation += ` = ${sum}`;
+    return calculation;
+  }
+
+  // 8. Convert from Celsius to Fahrenheit
+  function celsiusToFahrenheit(celsius) {
+    return (celsius * 9) / 5 + 32;
+  }
+
+  // 9. Convert from Fahrenheit to Celsius
+  function fahrenheitToCelsius(fahrenheit) {
+    return ((fahrenheit - 32) * 5) / 9;
+  }
+
+  // 10. Calculate the sum of numbers in an array of numbers
+  function sumArray(numbers) {
+    const sum = numbers.reduce((a, b) => a + b, 0);
+    const calculation = numbers.join(" + ") + " = " + sum;
+    return calculation;
+  }
+
+  // 11. Calculate the average of the numbers in an array
+  function averageArray(numbers) {
+    const sum = numbers.reduce((a, b) => a + b, 0);
+    const calculation = numbers.join(" + ") + " = " + sum;
+    const average = sum / numbers.length;
+    return `${calculation} / ${numbers.length} = ${average}`;
+  }
+
+  // 12. Filter positive numbers from an array
+  function filterPositiveNumbers(numbers) {
+    return numbers.filter((number) => number > 0);
+  }
+
+  // 13. Find the maximum number in an array
+  function maxNumber(numbers) {
+    return Math.max(...numbers);
+  }
+
+  // 14. Print the first 10 Fibonacci numbers without recursion
+  function fibonacci10() {
+    let fib = [0, 1];
+    for (let i = 2; i < 10; i++) {
+      fib[i] = fib[i - 1] + fib[i - 2];
+    }
+    return fib.join(", ");
+  }
+
+  // 15. Find the nth Fibonacci number using recursion
+  function nthFibonacci(n) {
+    if (n <= 1) return n;
+    return nthFibonacci(n - 1) + nthFibonacci(n - 2);
+  }
+
+  // 16. Check if a number is prime
+  function isPrime(num) {
+    if (num <= 1) return false;
+    if (num <= 3) return true;
+    if (num % 2 === 0 || num % 3 === 0) return false;
+    for (let i = 5; i * i <= num; i += 6) {
+      if (num % i === 0 || num % (i + 2) === 0) return false;
+    }
+    return true;
+  }
+
+  // 17. Sum of digits of a positive integer number
+  function sumOfDigits(num) {
+    const digits = num.toString().split("");
+    const sum = digits.reduce((a, b) => a + parseInt(b), 0);
+    const calculation = digits.join(" + ") + " = " + sum;
+    return calculation;
+  }
+
+  // 18. Print the first 100 prime numbers
+  function first100Primes() {
+    let primes = [];
+    let num = 2;
+    while (primes.length < 100) {
+      if (isPrime(num)) primes.push(num);
+      num++;
+    }
+    return primes.join(", ");
+  }
+
+  // 19. Return the first "p" prime numbers greater than "n"
+  function primesGreaterThanN(p, n) {
+    let primes = [];
+    let num = n + 1;
+    while (primes.length < p) {
+      if (isPrime(num)) primes.push(num);
+      num++;
+    }
+    return primes.join(", ");
+  }
+
+  // 20. Rotate an array to the left 1 position
+  function rotateLeft(arr) {
+    arr.push(arr.shift());
+    return arr;
+  }
+
+  // 21. Rotate an array to the right 1 position
+  function rotateRight(arr) {
+    arr.unshift(arr.pop());
+    return arr;
+  }
+
+  // 22. Reverse an array
+  function reverseArray(arr) {
+    return arr.reverse();
+  }
+
+  // 23. Reverse a string
+  function reverseString(str) {
+    return str.split("").reverse().join("");
+  }
+
+  // 24. Merge two arrays and return a new array
+  function mergeArrays(arr1, arr2) {
+    return [...arr1, ...arr2];
+  }
+
+  // 25. Return an array of elements either in the first array or the second array but not both
+  function arrayDifference(arr1, arr2) {
+    return arr1
+      .filter((x) => !arr2.includes(x))
+      .concat(arr2.filter((x) => !arr1.includes(x)));
+  }
+
+  // 26. Return an array with elements that are in the first array but not in the second
+  function arrayDifferenceFirstOnly(arr1, arr2) {
+    return arr1.filter((x) => !arr2.includes(x));
+  }
+
   // 27. Create a function that returns a new array with distinct elements
   function distinctElements(arr) {
     return [...new Set(arr)];
@@ -44,10 +268,10 @@ export default function App() {
   // 30. Add two positive numbers of indefinite size
   function addLargeNumbers(num1, num2) {
     let carry = 0;
-    let result = '';
+    let result = "";
     let maxLength = Math.max(num1.length, num2.length);
-    num1 = num1.padStart(maxLength, '0');
-    num2 = num2.padStart(maxLength, '0');
+    num1 = num1.padStart(maxLength, "0");
+    num2 = num2.padStart(maxLength, "0");
 
     for (let i = maxLength - 1; i >= 0; i--) {
       let sum = parseInt(num1[i]) + parseInt(num2[i]) + carry;
@@ -67,14 +291,14 @@ export default function App() {
   // 32. Capitalize the first letter of each word in a text
   function capitalizeWords(text) {
     return text
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   }
 
   // 33. Calculate the sum of numbers received in a comma-delimited string
   function sumFromDelimitedString(str) {
-    return str.split(',').reduce((sum, num) => sum + parseFloat(num), 0);
+    return str.split(",").reduce((sum, num) => sum + parseFloat(num), 0);
   }
 
   // 34. Return an array with words inside a text
@@ -84,29 +308,29 @@ export default function App() {
 
   // 35. Convert a CSV text to a “bi-dimensional” array
   function csvToArray(csv) {
-    return csv.split('\n').map(row => row.split(','));
+    return csv.split("\n").map((row) => row.split(","));
   }
 
   // 36. Convert a string to an array of characters
   function stringToCharArray(str) {
-    return str.split('');
+    return str.split("");
   }
 
   // 37. Convert a string into an array containing the ASCII codes of each character
   function stringToAsciiArray(str) {
-    return str.split('').map(char => char.charCodeAt(0));
+    return str.split("").map((char) => char.charCodeAt(0));
   }
 
   // 38. Convert an array containing ASCII codes into a string
   function asciiArrayToString(arr) {
-    return arr.map(code => String.fromCharCode(code)).join('');
+    return arr.map((code) => String.fromCharCode(code)).join("");
   }
 
   // 39. Implement the Caesar cipher
   function caesarCipher(str, shift) {
     return str
-      .split('')
-      .map(char => {
+      .split("")
+      .map((char) => {
         let code = char.charCodeAt(0);
         if (code >= 65 && code <= 90) {
           return String.fromCharCode(((code - 65 + shift) % 26) + 65);
@@ -116,7 +340,7 @@ export default function App() {
           return char;
         }
       })
-      .join('');
+      .join("");
   }
 
   // 40. Implement the bubble sort algorithm for an array of numbers
@@ -145,7 +369,7 @@ export default function App() {
 
   // 43. Extract a column from a bi-dimensional array
   function extractColumn(arr, columnNumber) {
-    return arr.map(row => row[columnNumber]);
+    return arr.map((row) => row[columnNumber]);
   }
 
   // 44. Convert a binary string to a number
@@ -166,19 +390,28 @@ export default function App() {
   function maxInJaggedArray(arr) {
     return arr.reduce(
       (max, elem) =>
-        Array.isArray(elem) ? Math.max(max, maxInJaggedArray(elem)) : Math.max(max, elem),
+        Array.isArray(elem)
+          ? Math.max(max, maxInJaggedArray(elem))
+          : Math.max(max, elem),
       -Infinity
     );
   }
 
   // 47. Deep copy a jagged array
   function deepCopyJaggedArray(arr) {
-    return arr.map(elem => (Array.isArray(elem) ? deepCopyJaggedArray(elem) : elem));
+    return arr.map((elem) =>
+      Array.isArray(elem) ? deepCopyJaggedArray(elem) : elem
+    );
   }
 
   // 48. Return the longest word in a string
   function longestWord(str) {
-    return str.split(/\s+/).reduce((longest, word) => (word.length > longest.length ? word : longest), '');
+    return str
+      .split(/\s+/)
+      .reduce(
+        (longest, word) => (word.length > longest.length ? word : longest),
+        ""
+      );
   }
 
   // 49. Shuffle an array of strings
@@ -199,7 +432,7 @@ export default function App() {
   // 51. Find the frequency of letters inside a string
   function letterFrequency(str) {
     let freq = {};
-    str.split('').forEach(char => {
+    str.split("").forEach((char) => {
       if (/[a-zA-Z]/.test(char)) {
         char = char.toLowerCase();
         freq[char] = (freq[char] || 0) + 1;
@@ -228,8 +461,232 @@ export default function App() {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>BÀI TẬP TUẦN 02</Text>
+      <Text style={styles.header}>
+        BÀI TẬP TUẦN 01 <br></br>50 challenges
+      </Text>
       <Text style={styles.title}>Nguyễn Đức Nhật_21059221</Text>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>1. Numbers from 1-10</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Output 1-10</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{printNumbers()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>2. Odd numbers less than 100</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Output odd number less than 100</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{printOddNumbers()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>3. Multiplication table 7</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Multiplication table 7</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{multiplicationTable7()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>4. Multiplication table 1-10</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Multiplication table 1-10</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{multiplicationTables()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>5. Sum of numbers from 1 - 10</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>From 1 - 10</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{sumNumbers()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>6. Factorial of 10</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>10!</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{factorial10()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>
+          7. Sum of even numbers greater than 10 and less than 30
+        </Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Sum even numbers from 10-30</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{sumEvenNumbers()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>8. Convert 100 Celsius to Fahrenheit</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Convert 100 Celsius to Fahrenheit</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{celsiusToFahrenheit(100)}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>9. Convert 212 Fahrenheit to Celsius</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Convert 212 Fahrenheit to Celsius</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{fahrenheitToCelsius(212)}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>10. Sum of numbers in array [1-10]</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Sum of numbers in array [1-10]</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{sumArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>11. Average of numbers in array [1-10]</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Average of numbers in array [1-10]</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{averageArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>12. Positive number in array</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>[-1, 2, -3, 4, -5, 6, -7, 8, -9, 10]</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>
+          {filterPositiveNumbers([-1, 2, -3, 4, -5, 6, -7, 8, -9, 10]).join(
+            ", "
+          )}
+        </Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>13. Maximum in array [1,2,3,4,5,6,7]</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Max in array [1,2,3,4,5,6,7]</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{maxNumber([1, 2, 3, 4, 5, 6, 7])}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>14. First 10 Fibonacci numbers</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>First 10 Fibonacci</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{fibonacci10()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>15. 10th Fibonacci number (recursion)</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>10th Fibonacci</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{nthFibonacci(10)}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>16. Check is Prime</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Check 29 is prime ?</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{isPrime(29).toString()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>17. Sum of digits of 12345</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>12345</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{sumOfDigits(12345)}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>18. First 100 prime numbers</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>First 100 numbers</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{first100Primes()}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>
+          19. First 10 prime numbers greater than 100
+        </Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>First 10 prime numbers greater than 100</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{primesGreaterThanN(10, 100)}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>20. Rotate [4,5] left</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Rotate [4,5] left</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{rotateLeft([4, 5]).join(", ")}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>21. Rotate [4,5] right</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Rotate [4,5] right</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{rotateRight([4, 5]).join(", ")}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>22. Reverse array [1, 2, 3, 4, 5]</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>[1, 2, 3, 4, 5]</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{reverseArray([1, 2, 3, 4, 5]).join(", ")}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>23. Reverse string "Hello Nhat"</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>Hello Nhat</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{reverseString("Hello Nhat")}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>24. Merge [1, 2, 3] and [4, 5, 6]</Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>[1, 2, 3] and [4, 5, 6]</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{mergeArrays([1, 2, 3], [4, 5, 6]).join(", ")}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>
+          25. Difference between [1, 2, 3, 4] and [3, 4, 5, 6]
+        </Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>[1, 2, 3, 4] and [3, 4, 5, 6]</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>{arrayDifference([1, 2, 3, 4], [3, 4, 5, 6]).join(", ")}</Text>
+      </View>
+
+      <View style={styles.item}>
+        <Text style={styles.bold}>
+          26. Difference from [1, 2, 3, 4] but not in [3, 4, 5, 6]
+        </Text>
+        <Text style={styles.inputOutput}>Input:</Text>
+        <Text>[1, 2, 3, 4] and [3, 4, 5, 6]</Text>
+        <Text style={styles.inputOutput}>Output:</Text>
+        <Text>
+          {arrayDifferenceFirstOnly([1, 2, 3, 4], [3, 4, 5, 6]).join(", ")}
+        </Text>
+      </View>
 
       <View style={styles.item}>
         <Text style={styles.bold}>27. Distinct Elements:</Text>
@@ -344,7 +801,9 @@ export default function App() {
       </View>
 
       <View style={styles.item}>
-        <Text style={styles.bold}>41. Distance Between Points (0,0) and (3,4):</Text>
+        <Text style={styles.bold}>
+          41. Distance Between Points (0,0) and (3,4):
+        </Text>
         <Text style={styles.inputOutput}>Input:</Text>
         <Text>Points: (0,0), (3,4)</Text>
         <Text style={styles.inputOutput}>Output:</Text>
@@ -354,7 +813,9 @@ export default function App() {
       <View style={styles.item}>
         <Text style={styles.bold}>42. Are Circles Intersecting:</Text>
         <Text style={styles.inputOutput}>Input:</Text>
-        <Text>Circle 1: Center (0,0), Radius 5; Circle 2: Center (4,0), Radius 5</Text>
+        <Text>
+          Circle 1: Center (0,0), Radius 5; Circle 2: Center (4,0), Radius 5
+        </Text>
         <Text style={styles.inputOutput}>Output:</Text>
         <Text>{areCirclesIntersecting(0, 0, 5, 4, 0, 5).toString()}</Text>
       </View>
@@ -364,7 +825,16 @@ export default function App() {
         <Text style={styles.inputOutput}>Input:</Text>
         <Text>Matrix: [[1, 2, 3], [4, 5, 6], [7, 8, 9]], Column: 1</Text>
         <Text style={styles.inputOutput}>Output:</Text>
-        <Text>{extractColumn([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 1).join(", ")}</Text>
+        <Text>
+          {extractColumn(
+            [
+              [1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9],
+            ],
+            1
+          ).join(", ")}
+        </Text>
       </View>
 
       <View style={styles.item}>
@@ -396,7 +866,9 @@ export default function App() {
         <Text style={styles.inputOutput}>Input:</Text>
         <Text>[1, [2, 3], [[4]], 5]</Text>
         <Text style={styles.inputOutput}>Output:</Text>
-        <Text>{JSON.stringify(deepCopyJaggedArray([1, [2, 3], [[4]], 5]))}</Text>
+        <Text>
+          {JSON.stringify(deepCopyJaggedArray([1, [2, 3], [[4]], 5]))}
+        </Text>
       </View>
 
       <View style={styles.item}>
@@ -454,26 +926,31 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: 'red',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "red",
+    textAlign: "center",
     marginBottom: 20,
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: 'red',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "red",
+    textAlign: "center",
     marginBottom: 20,
   },
   item: {
-    marginBottom: 10, // Tạo khoảng cách giữa các bài
+    marginBottom: 10,
+    borderColor: "#333",
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: "#FFF5EE",
+    padding: 10,
   },
   bold: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   inputOutput: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 5,
   },
 });
